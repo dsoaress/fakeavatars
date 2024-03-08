@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Avatar {
+  key String
+  gender String
+  path String
+
+  @@id([key, gender])
+  @@map("avatars")
+}
