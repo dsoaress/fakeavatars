@@ -20,10 +20,8 @@ export function cloudinaryAvatarCDNGateway(): AvatarCDNGateway {
       return fetch(path)
         .then(async (response) => {
           if (response.ok) {
-            const blob = await response.blob();
-            const resized = await sharp(await blob.arrayBuffer())
-              .resize(size)
-              .toBuffer();
+            const buffer = await(await response.blob()).arrayBuffer();
+            const resized = await sharp(buffer).resize(size).toBuffer();
             return new Blob([resized], { type: "image/png" });
           } else throw new Error("An error occurred while fetching the avatar");
         })
